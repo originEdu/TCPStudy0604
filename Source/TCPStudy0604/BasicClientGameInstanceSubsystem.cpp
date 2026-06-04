@@ -84,7 +84,6 @@ void UBasicClientGameInstanceSubsystem::SendLogin(const FString& UserID, const F
 
 void UBasicClientGameInstanceSubsystem::RecvAll()
 {
-	//헤더 받기
 	if (!ServerSocket)
 	{
 		return;
@@ -171,7 +170,7 @@ void UBasicClientGameInstanceSubsystem::DispatchPacket()
 		//메시지 비어있다면 빈값으로
 		FString Message = LoginData->message() ? UTF8_TO_TCHAR(LoginData->message()) : FString();
 
-		//UE_LOG(LogTemp, Warning, TEXT("Login %d %s"), LoginData->client_socket_id(), *Message);
+		UE_LOG(LogTemp, Warning, TEXT("Login %d %s"), LoginData->client_socket_id(), *Message);
 	}
 	break;
 	case UserPacket::PacketType_S2C_Spawn:
