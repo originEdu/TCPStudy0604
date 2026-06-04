@@ -4,7 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "Subsystems/GameInstanceSubsystem.h"
-#include "BasicGameInstanceSubsystem.generated.h"
+#include "Tickable.h" 
+
+#include "BasicClientGameInstanceSubsystem.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnTCPConnected);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnTCPDisconnected);
@@ -14,7 +16,7 @@ class FSocket;
  *
  */
 UCLASS()
-class TCPSTUDY0604_API UBasicGameInstanceSubsystem : public UGameInstanceSubsystem
+class TCPSTUDY0604_API UBasicClientGameInstanceSubsystem : public UGameInstanceSubsystem, public FTickableGameObject
 {
 	GENERATED_BODY()
 public:
@@ -32,6 +34,7 @@ public:
 	UPROPERTY(BlueprintAssignable, Category = "TCP")
 	FOnTCPDisconnected OnTCPDisconnected;
 
+	void SendLogin(const FString& UserID, const FString& Password);
 
 private:
 	TArray<uint8> RecvBuffer;
@@ -42,4 +45,9 @@ private:
 	FSocket* ServerSocket = nullptr;
 
 	void DispatchPacket();
+
+	//FTickableGameObject 상속시 반드시 추가해야하는 함수
+	virtual void Tick(float DeltaTime) override;
+	TStatId GetStatId() const override;
+
 };

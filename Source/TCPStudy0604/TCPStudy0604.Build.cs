@@ -49,7 +49,7 @@ public class TCPStudy0604 : ModuleRules
             //[강사님 코드]
             //windows
             //string LibraryPath = Path.Combine(ModuleDirectory, "..", "ThirdParty", "lib");
-            ////library 파일 추가 
+            //library 파일 추가 
             //PublicAdditionalLibraries.Add(Path.Combine(LibraryPath, "Win64", "MySQL.lib"));
         }
         else if (Target.Platform == UnrealTargetPlatform.Android)
